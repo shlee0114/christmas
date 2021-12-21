@@ -38,58 +38,34 @@ CREATE TABLE USER
 
 CREATE TABLE USER_CARD_LIST
 (
-    seq        BIGINT        NOT NULL AUTO_INCREMENT,
-    user_id    VARCHAR2(128) NOT NULL COMMENT '사용자 id',
-    card_order BIGINT        NOT NULL DEFAULT 0 COMMENT '사용자의 카드 순서',
-    default_yn CHAR(1)       NOT NULL DEFAULT 'N' COMMENT '기본 카드 여부',
-    created_at TIMESTAMP     NOT NULL DEFAULT NOW(),
-    updated_at TIMESTAMP     NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+    seq                 BIGINT        NOT NULL AUTO_INCREMENT,
+    user_id             VARCHAR2(128) NOT NULL COMMENT '사용자 id',
+    card_type           CHAR(2)       NOT NULL COMMENT '카드 사',
+    card_num            CHAR(12)      NOT NULL COMMENT '카드 번호',
+    card_available_date CHAR(4)       NOT NULL COMMENT '카드 유효 기간',
+    card_pw             CHAR(2)       NOT NULL COMMENT '카드 비밀번호 앞 2자리',
+    card_cvc            CHAR(3)       NOT NULL COMMENT '카드 CVC',
+    default_yn          CHAR(1)       NOT NULL DEFAULT 'N' COMMENT '기본 카드 여부',
+    created_at          TIMESTAMP     NOT NULL DEFAULT NOW(),
+    updated_at          TIMESTAMP     NOT NULL DEFAULT NOW() ON UPDATE NOW(),
     PRIMARY KEY (seq),
     CONSTRAINT fk_card_list_user_id FOREIGN KEY (user_id) REFERENCES USER (seq)
 );
 
-CREATE TABLE USER_CARD
-(
-    seq                 BIGINT    NOT NULL AUTO_INCREMENT,
-    card_seq            BIGINT    NOT NULL COMMENT '카드 id',
-    card_type           CHAR(2)   NOT NULL COMMENT '카드 사',
-    card_num            CHAR(12)  NOT NULL COMMENT '카드 번호',
-    card_available_date CHAR(4)   NOT NULL COMMENT '카드 유효 기간',
-    card_pw             CHAR(2)   NOT NULL COMMENT '카드 비밀번호 앞 2자리',
-    card_cvc            CHAR(3)   NOT NULL COMMENT '카드 CVC',
-    created_at          TIMESTAMP NOT NULL DEFAULT NOW(),
-    updated_at          TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
-    PRIMARY KEY (seq),
-    UNIQUE (card_seq),
-    CONSTRAINT fk_card_seq FOREIGN KEY (card_seq) REFERENCES USER_CARD_LIST (seq)
-);
-
 CREATE TABLE USER_ADDRESS_LIST
 (
-    seq           BIGINT        NOT NULL AUTO_INCREMENT,
-    user_id       VARCHAR2(128) NOT NULL COMMENT '사용자 id',
-    address_order TINYINT       NOT NULL DEFAULT 0 COMMENT '사용자의 주소 순서',
-    default_yn    CHAR(1)       NOT NULL DEFAULT 'N' COMMENT '기본 주소 여부',
-    created_at    TIMESTAMP     NOT NULL DEFAULT NOW(),
-    updated_at    TIMESTAMP     NOT NULL DEFAULT NOW() ON UPDATE NOW(),
-    PRIMARY KEY (seq),
-    CONSTRAINT fk_address_list_user_id FOREIGN KEY (user_id) REFERENCES USER (seq)
-);
-
-CREATE TABLE USER_ADDRESS
-(
     seq                   BIGINT        NOT NULL AUTO_INCREMENT,
-    address_seq           BIGINT        NOT NULL COMMENT '주소 id',
+    user_id               VARCHAR2(128) NOT NULL COMMENT '사용자 id',
     address               VARCHAR2(128) NOT NULL COMMENT '주소',
     address_detail        VARCHAR2(128) NOT NULL COMMENT '주소 상세',
     receiver_name         VARCHAR2(128) NOT NULL COMMENT '수취인 이름',
     receiver_phone_number VARCHAR2(128) NOT NULL COMMENT '수취인 전화번호',
     receiver_request      VARCHAR2(300) NOT NULL COMMENT '수취인 요구사항',
+    default_yn            CHAR(1)       NOT NULL DEFAULT 'N' COMMENT '기본 주소 여부',
     created_at            TIMESTAMP     NOT NULL DEFAULT NOW(),
     updated_at            TIMESTAMP     NOT NULL DEFAULT NOW() ON UPDATE NOW(),
     PRIMARY KEY (seq),
-    UNIQUE (address_seq),
-    CONSTRAINT fk_address_seq FOREIGN KEY (address_seq) REFERENCES USER_ADDRESS_LIST (seq)
+    CONSTRAINT fk_address_list_user_id FOREIGN KEY (user_id) REFERENCES USER (seq)
 );
 
 CREATE TABLE USER_ORDER_LIST
