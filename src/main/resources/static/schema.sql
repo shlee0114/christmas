@@ -1,16 +1,40 @@
 CREATE TABLE USER
 (
-    seq          BIGINT        NOT NULL AUTO_INCREMENT,
-    id           VARCHAR2(128) NOT NULL COMMENT '사용자 id',
-    pw           VARCHAR2(128) NOT NULL COMMENT '사용자 pw',
-    name         VARCHAR2(128) NOT NULL COMMENT '사용자 이름',
-    phone_number VARCHAR2(128) NOT NULL COMMENT '사용자 전화번호',
-    created_at   TIMESTAMP     NOT NULL DEFAULT NOW(),
-    updated_at   TIMESTAMP     NOT NULL DEFAULT NOW() ON UPDATE NOW(),
-    deleted_at   TIMESTAMP     NULL,
-    use_yn       CHAR(1)       NOT NULL DEFAULT 'Y' COMMENT '사용 여부',
+    seq        BIGINT        NOT NULL AUTO_INCREMENT,
+    id         VARCHAR2(128) NOT NULL COMMENT '사용자 id',
+    pw         VARCHAR2(128) NOT NULL COMMENT '사용자 pw',
+    user_type  CHAR(1)       NOT NULL COMMENT '사용자 타입(0:일반 유저, 1:판매자)',
+    created_at TIMESTAMP     NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP     NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+    deleted_at TIMESTAMP     NULL,
+    use_yn     CHAR(1)       NOT NULL DEFAULT 'Y' COMMENT '사용 여부',
     PRIMARY KEY (seq),
     UNIQUE (id)
+);
+
+CREATE TABLE USER_INFO
+(
+    seq          BIGINT        NOT NULL AUTO_INCREMENT,
+    user_id      VARCHAR2(128) NOT NULL COMMENT '사용자 id',
+    name         VARCHAR2(128) NOT NULL COMMENT '사용자 이름',
+    phone_number VARCHAR2(128) NOT NULL COMMENT '사용자 전화번호',
+    PRIMARY KEY (seq),
+    CONSTRAINT fk_user_info_user_id FOREIGN KEY (user_id) REFERENCES USER (seq)
+);
+
+CREATE TABLE SELLER_INFO
+(
+    seq                 BIGINT        NOT NULL AUTO_INCREMENT,
+    user_id             VARCHAR2(128) NOT NULL COMMENT '사용자 id',
+    name                VARCHAR2(128) NOT NULL COMMENT '스토어 이름',
+    representative_name VARCHAR2(128) NOT NULL COMMENT '대표 이름',
+    phone_number        VARCHAR2(128) NOT NULL COMMENT '기업 전화번호',
+    crn                 CHAR(10)      NOT NULL COMMENT '사업자 등록 번호',
+    email               VARCHAR2(128) NOT NULL COMMENT '기업 E-MAIL',
+    address             VARCHAR2(128) NOT NULL COMMENT '주소',
+    address_detail      VARCHAR2(128) NOT NULL COMMENT '주소 상세',
+    PRIMARY KEY (seq),
+    CONSTRAINT fk_seller_info_user_id FOREIGN KEY (user_id) REFERENCES USER (seq)
 );
 
 CREATE TABLE USER_CARD_LIST
