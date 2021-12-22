@@ -79,6 +79,10 @@ CREATE TABLE PRODUCT_LIST
     sub_title VARCHAR2(30) NOT NULL COMMENT '제품 소 이름',
     price BIGINT NOT NULL COMMENT '가격',
     content BLOB NOT NULL COMMENT '상세 설명',
+    created_at TIMESTAMP     NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP     NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+    deleted_at TIMESTAMP     NULL,
+    use_yn     CHAR(1)       NOT NULL DEFAULT 'Y' COMMENT '사용 여부',
     PRIMARY KEY (seq),
     CONSTRAINT fk_thumbnail_id FOREIGN KEY (thumbnail_id) REFERENCES FILE_LIST (seq)
 );
