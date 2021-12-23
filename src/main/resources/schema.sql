@@ -18,9 +18,9 @@ CREATE TABLE USER_INFO
     user_id      VARCHAR2(128) NOT NULL COMMENT '사용자 id',
     name         VARCHAR2(128) NOT NULL COMMENT '사용자 이름',
     phone_number VARCHAR2(128) NOT NULL COMMENT '사용자 전화번호',
-    PRIMARY KEY (seq),
-    CONSTRAINT fk_user_info_user_id FOREIGN KEY (user_id) REFERENCES USER (seq)
+    PRIMARY KEY (seq)
 );
+
 
 CREATE TABLE SELLER_INFO
 (
@@ -33,8 +33,7 @@ CREATE TABLE SELLER_INFO
     email               VARCHAR2(128) NOT NULL COMMENT '기업 E-MAIL',
     address             VARCHAR2(128) NOT NULL COMMENT '주소',
     address_detail      VARCHAR2(128) NOT NULL COMMENT '주소 상세',
-    PRIMARY KEY (seq),
-    CONSTRAINT fk_seller_info_user_id FOREIGN KEY (user_id) REFERENCES USER (seq)
+    PRIMARY KEY (seq)
 );
 
 CREATE TABLE USER_CARD_LIST
@@ -50,8 +49,7 @@ CREATE TABLE USER_CARD_LIST
     default_yn          CHAR(1)       NOT NULL DEFAULT 'N' COMMENT '기본 카드 여부',
     created_at          TIMESTAMP     NOT NULL DEFAULT NOW(),
     updated_at          TIMESTAMP     NOT NULL DEFAULT NOW() ON UPDATE NOW(),
-    PRIMARY KEY (seq),
-    CONSTRAINT fk_card_list_user_id FOREIGN KEY (user_id) REFERENCES USER (seq)
+    PRIMARY KEY (seq)
 );
 
 CREATE TABLE USER_ADDRESS_LIST
@@ -67,8 +65,7 @@ CREATE TABLE USER_ADDRESS_LIST
     default_yn            CHAR(1)       NOT NULL DEFAULT 'N' COMMENT '기본 주소 여부',
     created_at            TIMESTAMP     NOT NULL DEFAULT NOW(),
     updated_at            TIMESTAMP     NOT NULL DEFAULT NOW() ON UPDATE NOW(),
-    PRIMARY KEY (seq),
-    CONSTRAINT fk_address_list_user_id FOREIGN KEY (user_id) REFERENCES USER (seq)
+    PRIMARY KEY (seq)
 );
 
 CREATE TABLE PRODUCT_LIST
@@ -83,8 +80,7 @@ CREATE TABLE PRODUCT_LIST
     updated_at TIMESTAMP     NOT NULL DEFAULT NOW() ON UPDATE NOW(),
     deleted_at TIMESTAMP     NULL,
     use_yn     CHAR(1)       NOT NULL DEFAULT 'Y' COMMENT '사용 여부',
-    PRIMARY KEY (seq),
-    CONSTRAINT fk_thumbnail_id FOREIGN KEY (thumbnail_id) REFERENCES FILE_LIST (seq)
+    PRIMARY KEY (seq)
 );
 
 CREATE TABLE ORDER_LIST
@@ -101,11 +97,7 @@ CREATE TABLE ORDER_LIST
     rejected_at  TIMESTAMP      NULL COMMENT '주문 거절일자',
     created_at   TIMESTAMP      NOT NULL DEFAULT NOW(),
     updated_at   TIMESTAMP      NOT NULL DEFAULT NOW() ON UPDATE NOW(),
-    PRIMARY KEY (seq),
-    CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES USER (seq),
-    CONSTRAINT fk_address_seq FOREIGN KEY (address_seq) REFERENCES USER_ADDRESS_LIST (seq),
-    CONSTRAINT fk_card_seq FOREIGN KEY (card_seq) REFERENCES USER_CARD_LIST (seq),
-    CONSTRAINT fk_product_seq FOREIGN KEY (product_seq) REFERENCES PRODUCT_LIST (seq)
+    PRIMARY KEY (seq)
 );
 
 CREATE TABLE FILE_LIST
@@ -124,7 +116,26 @@ CREATE TABLE FILE
     original_file_name VARCHAR2(255) NOT NULL COMMENT 'file 원 이름',
     file_extension     VARCHAR2(20)  NOT NULL COMMENT 'file 확장자',
     file_size          BIGINT        NOT NULL COMMENT 'file 크기',
-    CONSTRAINT fk_file_id FOREIGN KEY (file_id) REFERENCES FILE_LIST (seq),
     PRIMARY KEY (seq)
-
 );
+
+ALTER TABLE USER_INFO
+    ADD CONSTRAINT fk_user_info_user_id FOREIGN KEY (user_id) REFERENCES USER (seq);
+ALTER TABLE SELLER_INFO
+    ADD CONSTRAINT fk_seller_info_user_id FOREIGN KEY (user_id) REFERENCES USER (seq);
+ALTER TABLE USER_CARD_LIST
+    ADD CONSTRAINT fk_card_list_user_id FOREIGN KEY (user_id) REFERENCES USER (seq);
+ALTER TABLE USER_ADDRESS_LIST
+    ADD CONSTRAINT fk_address_list_user_id FOREIGN KEY (user_id) REFERENCES USER (seq);
+ALTER TABLE PRODUCT_LIST
+    ADD CONSTRAINT fk_thumbnail_id FOREIGN KEY (thumbnail_id) REFERENCES FILE_LIST (seq);
+ALTER TABLE ORDER_LIST
+    ADD CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES USER (seq);
+ALTER TABLE ORDER_LIST
+    ADD CONSTRAINT fk_address_seq FOREIGN KEY (address_seq) REFERENCES USER_ADDRESS_LIST (seq);
+ALTER TABLE ORDER_LIST
+    ADD CONSTRAINT fk_card_seq FOREIGN KEY (card_seq) REFERENCES USER_CARD_LIST (seq);
+ALTER TABLE ORDER_LIST
+    ADD CONSTRAINT fk_product_seq FOREIGN KEY (product_seq) REFERENCES PRODUCT_LIST (seq);
+ALTER TABLE FILE
+    ADD CONSTRAINT fk_file_id FOREIGN KEY (file_id) REFERENCES FILE_LIST (seq);
