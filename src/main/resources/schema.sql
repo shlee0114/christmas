@@ -70,16 +70,16 @@ CREATE TABLE USER_ADDRESS_LIST
 
 CREATE TABLE PRODUCT_LIST
 (
-    seq          BIGINT NOT NULL AUTO_INCREMENT,
-    thumbnail_id BIGINT NOT NULL COMMENT '썸내일 id',
-    title VARCHAR2(30) NOT NULL COMMENT '제품 이름',
-    sub_title VARCHAR2(30) NOT NULL COMMENT '제품 소 이름',
-    price BIGINT NOT NULL COMMENT '가격',
-    content BLOB NOT NULL COMMENT '상세 설명',
-    created_at TIMESTAMP     NOT NULL DEFAULT NOW(),
-    updated_at TIMESTAMP     NOT NULL DEFAULT NOW() ON UPDATE NOW(),
-    deleted_at TIMESTAMP     NULL,
-    use_yn     CHAR(1)       NOT NULL DEFAULT 'Y' COMMENT '사용 여부',
+    seq          BIGINT       NOT NULL AUTO_INCREMENT,
+    thumbnail_id BIGINT       NOT NULL COMMENT '썸내일 id',
+    title        VARCHAR2(30) NOT NULL COMMENT '제품 이름',
+    sub_title    VARCHAR2(30) NOT NULL COMMENT '제품 소 이름',
+    price        BIGINT       NOT NULL COMMENT '가격',
+    content      BLOB         NOT NULL COMMENT '상세 설명',
+    created_at   TIMESTAMP    NOT NULL DEFAULT NOW(),
+    updated_at   TIMESTAMP    NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+    deleted_at   TIMESTAMP    NULL,
+    use_yn       CHAR(1)      NOT NULL DEFAULT 'Y' COMMENT '사용 여부',
     PRIMARY KEY (seq)
 );
 
