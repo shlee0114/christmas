@@ -13,3 +13,12 @@ spring:
     properties:
       hibernate:
         format_sql: true
+server:
+  port: 5000
+
+jwt:
+  token:
+    header: Authorization
+    issuer: christmas
+    client-secret: fewge1r3we2y43qrgjytk45w612yh
+    expiry-seconds: 0
