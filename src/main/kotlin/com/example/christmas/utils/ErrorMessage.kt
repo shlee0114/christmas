@@ -3,15 +3,15 @@ package com.example.christmas.utils
 enum class ErrorMessage {
     INVALID_VALUE {
         override fun getMessage(additionalMessage: String) =
-            "${additionalMessage}가 존재하지 않습니다."
+            "${additionalMessage}값이 존재하지 않습니다."
     },
     INVALID_FORMAT {
         override fun getMessage(additionalMessage: String) =
-            "${additionalMessage}의 형식만 입력 가능합니다."
+            "[${additionalMessage.split("!@#")[0]}]은 [${additionalMessage.split("!@#")[1]}] 형식만 입력 가능합니다."
     },
     OUT_OF_RANGE {
         override fun getMessage(additionalMessage: String) =
-            "[${additionalMessage.split("!")[0]}]의 허용 범위는 ${additionalMessage.split("!")[1]}입니다."
+            "[${additionalMessage.split("!@#")[0]}]의 허용 범위는 ${additionalMessage.split("!@#")[1]}입니다."
     },
     TYPE_MISMATCH {
         override fun getMessage(additionalMessage: String) =
