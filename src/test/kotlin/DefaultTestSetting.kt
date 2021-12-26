@@ -1,4 +1,5 @@
 import com.example.christmas.config.JwtTokenConfig
+import com.example.christmas.utils.ErrorMessage
 import org.hamcrest.Matchers
 import org.hamcrest.core.IsNull
 import org.springframework.beans.factory.annotation.Autowired
@@ -28,15 +29,15 @@ abstract class DefaultTestSetting {
         this._jwtTokenConfig = jwtTokenConfig
     }
 
-    fun ResultActions.checkIsError(status: ResultMatcher, errorMessage: String) =
+    fun ResultActions.checkIsError(status: ResultMatcher, errorCode: ErrorMessage, additionalMessage: String = "") =
         andDo(MockMvcResultHandlers.print())
             .andExpect(status)
             .andExpect(MockMvcResultMatchers.jsonPath("$.data", Matchers.`is`(IsNull.nullValue())))
-            .andExpect(MockMvcResultMatchers.jsonPath("$.error.message", Matchers.`is`(errorMessage)))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.error.code", Matchers.`is`(errorCode.name)))
             .andExpect(
                 MockMvcResultMatchers.jsonPath(
                     "$.error.message",
-                    Matchers.`is`(errorMessage)
+                    Matchers.`is`(errorCode.getMessage(additionalMessage))
                 )
             )
 
