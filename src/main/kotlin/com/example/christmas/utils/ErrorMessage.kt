@@ -17,6 +17,10 @@ enum class ErrorMessage {
         override fun getMessage(additionalMessage: String) =
             "${additionalMessage}형만 입력 가능합니다."
     },
+    NOT_AUTHORIZED {
+        override fun getMessage(additionalMessage: String) =
+            "TOKEN 값이 올바르지 않습니다."
+    },
     NONE {
         override fun getMessage(additionalMessage: String) = ""
     };
