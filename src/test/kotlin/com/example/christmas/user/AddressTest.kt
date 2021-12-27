@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
 class AddressTest : DefaultTestSetting() {
-    override val rootPath = "/user"
+    override val rootPath = "/user/address"
 
     @Test
     fun myAddressList_returnAddressList_success() {

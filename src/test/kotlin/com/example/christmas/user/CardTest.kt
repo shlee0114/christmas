@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
 class CardTest : DefaultTestSetting() {
-    override val rootPath = "/user"
+    override val rootPath = "/user/card"
 
     @Test
     fun myCardList_returnCardList_success() {

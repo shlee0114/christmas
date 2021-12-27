@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
 class ProductTest : DefaultTestSetting() {
-    override val rootPath = "/seller"
+    override val rootPath = "/seller/product"
     
     @Test
     fun myProductList_returnProductList_success() {
