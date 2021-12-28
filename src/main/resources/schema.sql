@@ -1,70 +1,70 @@
 CREATE TABLE USER
 (
-    seq        BIGINT        NOT NULL AUTO_INCREMENT,
-    id         VARCHAR2(128) NOT NULL COMMENT '사용자 id',
-    pw         VARCHAR2(128) NOT NULL COMMENT '사용자 pw',
-    user_type  CHAR(1)       NOT NULL COMMENT '사용자 타입(0:일반 유저, 1:판매자)',
-    created_at TIMESTAMP     NOT NULL DEFAULT NOW(),
-    updated_at TIMESTAMP     NOT NULL DEFAULT NOW() ON UPDATE NOW(),
-    deleted_at TIMESTAMP     NULL,
-    use_yn     CHAR(1)       NOT NULL DEFAULT 'Y' COMMENT '사용 여부',
+    seq        BIGINT    NOT NULL AUTO_INCREMENT,
+    id         CHAR(128) NOT NULL COMMENT '사용자 id',
+    pw         CHAR(128) NOT NULL COMMENT '사용자 pw',
+    user_type  CHAR(1)   NOT NULL COMMENT '사용자 타입(0:일반 유저, 1:판매자)',
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+    deleted_at TIMESTAMP NULL,
+    use_yn     CHAR(1)   NOT NULL DEFAULT 'Y' COMMENT '사용 여부',
     PRIMARY KEY (seq),
     UNIQUE (id)
 );
 
 CREATE TABLE USER_INFO
 (
-    seq          BIGINT        NOT NULL AUTO_INCREMENT,
-    user_id      VARCHAR2(128) NOT NULL COMMENT '사용자 id',
-    name         VARCHAR2(128) NOT NULL COMMENT '사용자 이름',
-    phone_number VARCHAR2(128) NOT NULL COMMENT '사용자 전화번호',
+    seq          BIGINT    NOT NULL AUTO_INCREMENT,
+    user_id      CHAR(128) NOT NULL COMMENT '사용자 id',
+    name         CHAR(128) NOT NULL COMMENT '사용자 이름',
+    phone_number CHAR(128) NOT NULL COMMENT '사용자 전화번호',
     PRIMARY KEY (seq)
 );
 
 
 CREATE TABLE SELLER_INFO
 (
-    seq                 BIGINT        NOT NULL AUTO_INCREMENT,
-    user_id             VARCHAR2(128) NOT NULL COMMENT '사용자 id',
-    name                VARCHAR2(128) NOT NULL COMMENT '스토어 이름',
-    representative_name VARCHAR2(128) NOT NULL COMMENT '대표 이름',
-    phone_number        VARCHAR2(128) NOT NULL COMMENT '기업 전화번호',
-    crn                 CHAR(10)      NOT NULL COMMENT '사업자 등록 번호',
-    email               VARCHAR2(128) NOT NULL COMMENT '기업 E-MAIL',
-    address             VARCHAR2(128) NOT NULL COMMENT '주소',
-    address_detail      VARCHAR2(128) NOT NULL COMMENT '주소 상세',
+    seq                 BIGINT    NOT NULL AUTO_INCREMENT,
+    user_id             CHAR(128) NOT NULL COMMENT '사용자 id',
+    name                CHAR(128) NOT NULL COMMENT '스토어 이름',
+    representative_name CHAR(128) NOT NULL COMMENT '대표 이름',
+    phone_number        CHAR(128) NOT NULL COMMENT '기업 전화번호',
+    crn                 CHAR(10)  NOT NULL COMMENT '사업자 등록 번호',
+    email               CHAR(128) NOT NULL COMMENT '기업 E-MAIL',
+    address             CHAR(128) NOT NULL COMMENT '주소',
+    address_detail      CHAR(128) NOT NULL COMMENT '주소 상세',
     PRIMARY KEY (seq)
 );
 
 CREATE TABLE USER_CARD_LIST
 (
-    seq                 BIGINT        NOT NULL AUTO_INCREMENT,
-    user_id             VARCHAR2(128) NOT NULL COMMENT '사용자 id',
-    card_order          TINYINT       NOT NULL COMMENT '카드 순서',
-    card_type           CHAR(2)       NOT NULL COMMENT '카드 사',
-    card_num            CHAR(12)      NOT NULL COMMENT '카드 번호',
-    card_available_date CHAR(4)       NOT NULL COMMENT '카드 유효 기간',
-    card_pw             CHAR(2)       NOT NULL COMMENT '카드 비밀번호 앞 2자리',
-    card_cvc            CHAR(3)       NOT NULL COMMENT '카드 CVC',
-    default_yn          CHAR(1)       NOT NULL DEFAULT 'N' COMMENT '기본 카드 여부',
-    created_at          TIMESTAMP     NOT NULL DEFAULT NOW(),
-    updated_at          TIMESTAMP     NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+    seq                 BIGINT    NOT NULL AUTO_INCREMENT,
+    user_id             CHAR(128) NOT NULL COMMENT '사용자 id',
+    card_order          TINYINT   NOT NULL COMMENT '카드 순서',
+    card_type           CHAR(2)   NOT NULL COMMENT '카드 사',
+    card_num            CHAR(256) NOT NULL COMMENT '카드 번호',
+    card_available_date CHAR(256) NOT NULL COMMENT '카드 유효 기간',
+    card_pw             CHAR(256) NOT NULL COMMENT '카드 비밀번호 앞 2자리',
+    card_cvc            CHAR(256) NOT NULL COMMENT '카드 CVC',
+    default_yn          CHAR(1)   NOT NULL DEFAULT 'N' COMMENT '기본 카드 여부',
+    created_at          TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_at          TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
     PRIMARY KEY (seq)
 );
 
 CREATE TABLE USER_ADDRESS_LIST
 (
-    seq                   BIGINT        NOT NULL AUTO_INCREMENT,
-    user_id               VARCHAR2(128) NOT NULL COMMENT '사용자 id',
-    address_order         TINYINT       NOT NULL COMMENT '주소 순서',
-    address               VARCHAR2(128) NOT NULL COMMENT '주소',
-    address_detail        VARCHAR2(128) NOT NULL COMMENT '주소 상세',
-    receiver_name         VARCHAR2(128) NOT NULL COMMENT '수취인 이름',
-    receiver_phone_number VARCHAR2(128) NOT NULL COMMENT '수취인 전화번호',
-    receiver_request      VARCHAR2(300) NOT NULL COMMENT '수취인 요구사항',
-    default_yn            CHAR(1)       NOT NULL DEFAULT 'N' COMMENT '기본 주소 여부',
-    created_at            TIMESTAMP     NOT NULL DEFAULT NOW(),
-    updated_at            TIMESTAMP     NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+    seq                   BIGINT    NOT NULL AUTO_INCREMENT,
+    user_id               CHAR(128) NOT NULL COMMENT '사용자 id',
+    address_order         TINYINT   NOT NULL COMMENT '주소 순서',
+    address               CHAR(128) NOT NULL COMMENT '주소',
+    address_detail        CHAR(128) NOT NULL COMMENT '주소 상세',
+    receiver_name         CHAR(128) NOT NULL COMMENT '수취인 이름',
+    receiver_phone_number CHAR(128) NOT NULL COMMENT '수취인 전화번호',
+    receiver_request      CHAR(300) NOT NULL COMMENT '수취인 요구사항',
+    default_yn            CHAR(1)   NOT NULL DEFAULT 'N' COMMENT '기본 주소 여부',
+    created_at            TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_at            TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
     PRIMARY KEY (seq)
 );
 
@@ -86,7 +86,7 @@ CREATE TABLE PRODUCT_LIST
 CREATE TABLE ORDER_LIST
 (
     seq          BIGINT         NOT NULL AUTO_INCREMENT,
-    user_id      VARCHAR2(128)  NOT NULL COMMENT '사용자 id',
+    user_id      CHAR(128)      NOT NULL COMMENT '사용자 id',
     address_seq  BIGINT         NOT NULL COMMENT '주소 id',
     card_seq     BIGINT         NOT NULL COMMENT '카드 id',
     product_seq  BIGINT         NOT NULL COMMENT '물품 id',
