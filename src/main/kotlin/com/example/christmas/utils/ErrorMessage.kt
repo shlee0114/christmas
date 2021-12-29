@@ -21,6 +21,10 @@ enum class ErrorMessage {
         override fun getMessage(additionalMessage: String) =
             "TOKEN 값이 올바르지 않습니다."
     },
+    NOT_FOUND {
+        override fun getMessage(additionalMessage: String) =
+            "[${additionalMessage}]값을 찾을 수 없습니다."
+    },
     NONE {
         override fun getMessage(additionalMessage: String) = ""
     };
