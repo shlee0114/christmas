@@ -29,7 +29,7 @@ CREATE TABLE SELLER_INFO
     name                CHAR(128) NOT NULL COMMENT '스토어 이름',
     representative_name CHAR(128) NOT NULL COMMENT '대표 이름',
     phone_number        CHAR(128) NOT NULL COMMENT '기업 전화번호',
-    crn                 CHAR(10)  NOT NULL COMMENT '사업자 등록 번호',
+    crn                 CHAR(12)  NOT NULL COMMENT '사업자 등록 번호',
     email               CHAR(128) NOT NULL COMMENT '기업 E-MAIL',
     address             CHAR(128) NOT NULL COMMENT '주소',
     address_detail      CHAR(128) NOT NULL COMMENT '주소 상세',
