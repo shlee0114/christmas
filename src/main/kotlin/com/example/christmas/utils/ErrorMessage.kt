@@ -15,7 +15,7 @@ enum class ErrorMessage {
     },
     TYPE_MISMATCH {
         override fun getMessage(additionalMessage: String) =
-            "${additionalMessage}형만 입력 가능합니다."
+            "${additionalMessage.split("!@#")[0]}에는 ${additionalMessage.split("!@#")[1]}형만 입력 가능합니다."
     },
     NOT_AUTHORIZED {
         override fun getMessage(additionalMessage: String) =
