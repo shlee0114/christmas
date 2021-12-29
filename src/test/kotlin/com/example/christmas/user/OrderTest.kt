@@ -2,7 +2,7 @@ package com.example.christmas.user
 
 import DefaultTestSetting
 import com.example.christmas.utils.ErrorMessage
-import org.hamcrest.Matchers
+import org.hamcrest.Matchers.`is`
 import org.hamcrest.core.IsNull
 import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.Test
@@ -24,9 +24,9 @@ class OrderTest : DefaultTestSetting() {
         doGet()
             .andDo(MockMvcResultHandlers.print())
             .andExpect(status().isOk)
-            .andExpect(jsonPath("$.success", Matchers.`is`(true)))
+            .andExpect(jsonPath("$.success", `is`(true)))
             .andExpect(jsonPath("$.data").isArray)
-            .andExpect(jsonPath("$.error", Matchers.`is`(IsNull.nullValue())))
+            .andExpect(jsonPath("$.error", `is`(IsNull.nullValue())))
     }
 
     @Test
@@ -41,9 +41,9 @@ class OrderTest : DefaultTestSetting() {
         doGet("1")
             .andDo(MockMvcResultHandlers.print())
             .andExpect(status().isOk)
-            .andExpect(jsonPath("$.success", Matchers.`is`(true)))
-            .andExpect(jsonPath("$.data").isArray)
-            .andExpect(jsonPath("$.error", Matchers.`is`(IsNull.nullValue())))
+            .andExpect(jsonPath("$.success", `is`(true)))
+            .andExpect(jsonPath("$.data").exists())
+            .andExpect(jsonPath("$.error", `is`(IsNull.nullValue())))
     }
 
     @Test
