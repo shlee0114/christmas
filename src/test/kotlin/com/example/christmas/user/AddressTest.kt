@@ -47,7 +47,10 @@ class AddressTest : DefaultTestSetting() {
 
     @Test
     fun addAddress_throwException_unauthorized() {
-        doAuthenticatedPost(randomAlphanumeric(60), body = "{\"address\" : {\"address\":\"testtest\", \"addressDetail\":\"testtest\", \"receiverName\":\"test\", \"receiverPhoneNumber\":\"000-0000-0000\",\"receiverRequest\":\"test\"}}")
+        doAuthenticatedPost(
+            randomAlphanumeric(60),
+            body = "{\"address\" : {\"address\":\"testtest\", \"addressDetail\":\"testtest\", \"receiverName\":\"test\", \"receiverPhoneNumber\":\"000-0000-0000\",\"receiverRequest\":\"test\"}}"
+        )
             .checkIsError(status().isBadRequest, ErrorMessage.NOT_AUTHORIZED)
     }
 
@@ -55,7 +58,13 @@ class AddressTest : DefaultTestSetting() {
     fun addAddress_throwException_unsuitable() {
         doPost(body = "{\"address\" : {\"address\":\"testtest\", \"addressDetail\":\"testtest\", \"receiverName\":\"test\", \"receiverPhoneNumber\":\"000-000-0000\",\"receiverRequest\":\"test\"}}")
             .checkIsError(status().isBadRequest, ErrorMessage.INVALID_FORMAT, "receiverPhoneNumber!@#000-0000-0000")
-        doPost(body = "{\"address\" : {\"address\":\"testtest\", \"addressDetail\":\"testtest\", \"receiverName\":\"test\", \"receiverPhoneNumber\":\"000-000-0000\",\"receiverRequest\":\"${randomAlphanumeric(301)}\"}}")
+        doPost(
+            body = "{\"address\" : {\"address\":\"testtest\", \"addressDetail\":\"testtest\", \"receiverName\":\"test\", \"receiverPhoneNumber\":\"000-000-0000\",\"receiverRequest\":\"${
+                randomAlphanumeric(
+                    301
+                )
+            }\"}}"
+        )
             .checkIsError(status().isBadRequest, ErrorMessage.OUT_OF_RANGE, "receiverRequest!@#0~300")
     }
 
@@ -85,7 +94,10 @@ class AddressTest : DefaultTestSetting() {
 
     @Test
     fun modifyAddress_throwException_unauthorized() {
-        doAuthenticatedPut(randomAlphanumeric(60), body = "{\"address\" : {\"seq\":\"1\", \"address\":\"testtest\", \"addressDetail\":\"testtest\", \"receiverName\":\"test\", \"receiverPhoneNumber\":\"000-0000-0000\",\"receiverRequest\":\"test\"}}")
+        doAuthenticatedPut(
+            randomAlphanumeric(60),
+            body = "{\"address\" : {\"seq\":\"1\", \"address\":\"testtest\", \"addressDetail\":\"testtest\", \"receiverName\":\"test\", \"receiverPhoneNumber\":\"000-0000-0000\",\"receiverRequest\":\"test\"}}"
+        )
             .checkIsError(status().isBadRequest, ErrorMessage.NOT_AUTHORIZED)
     }
 
@@ -93,7 +105,13 @@ class AddressTest : DefaultTestSetting() {
     fun modifyAddress_throwException_unsuitable() {
         doPut(body = "{\"address\" : {\"seq\":\"1\", \"address\":\"testtest\", \"addressDetail\":\"testtest\", \"receiverName\":\"test\", \"receiverPhoneNumber\":\"000-000-0000\",\"receiverRequest\":\"test\"}}")
             .checkIsError(status().isBadRequest, ErrorMessage.INVALID_FORMAT, "receiverPhoneNumber!@#000-0000-0000")
-        doPut(body = "{\"address\" : {\"seq\":\"1\", \"address\":\"testtest\", \"addressDetail\":\"testtest\", \"receiverName\":\"test\", \"receiverPhoneNumber\":\"000-000-0000\",\"receiverRequest\":\"${randomAlphanumeric(301)}\"}}")
+        doPut(
+            body = "{\"address\" : {\"seq\":\"1\", \"address\":\"testtest\", \"addressDetail\":\"testtest\", \"receiverName\":\"test\", \"receiverPhoneNumber\":\"000-000-0000\",\"receiverRequest\":\"${
+                randomAlphanumeric(
+                    301
+                )
+            }\"}}"
+        )
             .checkIsError(status().isBadRequest, ErrorMessage.OUT_OF_RANGE, "receiverRequest!@#0~300")
     }
 

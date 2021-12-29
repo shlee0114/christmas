@@ -102,7 +102,10 @@ class UserTest : DefaultTestSetting() {
 
     @Test
     fun modifyUser_throwException_unauthorized() {
-        doAuthenticatedPut(randomAlphanumeric(60),body = "{\"user\" : {\"userName\":\"test\", \"phoneNumber\":\"000-0000-0000\"}}")
+        doAuthenticatedPut(
+            randomAlphanumeric(60),
+            body = "{\"user\" : {\"userName\":\"test\", \"phoneNumber\":\"000-0000-0000\"}}"
+        )
             .checkIsError(status().isBadRequest, ErrorMessage.NOT_AUTHORIZED)
     }
 
