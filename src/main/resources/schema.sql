@@ -4,10 +4,6 @@ CREATE TABLE USER
     id         CHAR(128) NOT NULL COMMENT '사용자 id',
     pw         CHAR(128) NOT NULL COMMENT '사용자 pw',
     user_type  CHAR(1)   NOT NULL COMMENT '사용자 타입(0:일반 유저, 1:판매자)',
-    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-    updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
-    deleted_at TIMESTAMP NULL,
-    use_yn     CHAR(1)   NOT NULL DEFAULT 'Y' COMMENT '사용 여부',
     PRIMARY KEY (seq),
     UNIQUE (id)
 );
@@ -18,6 +14,8 @@ CREATE TABLE USER_INFO
     user_id      CHAR(128) NOT NULL COMMENT '사용자 id',
     name         CHAR(128) NOT NULL COMMENT '사용자 이름',
     phone_number CHAR(128) NOT NULL COMMENT '사용자 전화번호',
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
     PRIMARY KEY (seq)
 );
 
@@ -33,6 +31,8 @@ CREATE TABLE SELLER_INFO
     email               CHAR(128) NOT NULL COMMENT '기업 E-MAIL',
     address             CHAR(128) NOT NULL COMMENT '주소',
     address_detail      CHAR(128) NOT NULL COMMENT '주소 상세',
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
     PRIMARY KEY (seq)
 );
 
