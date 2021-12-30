@@ -5,7 +5,7 @@ CREATE TABLE USER
     pw         CHAR(128) NOT NULL COMMENT '사용자 pw',
     user_type  CHAR(1)   NOT NULL COMMENT '사용자 타입(0:일반 유저, 1:판매자)',
     PRIMARY KEY (seq),
-    UNIQUE (id)
+    UNIQUE (id, user_type)
 );
 
 CREATE TABLE USER_INFO
