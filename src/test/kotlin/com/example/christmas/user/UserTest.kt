@@ -90,7 +90,7 @@ class UserTest : DefaultTestSetting() {
     @Test
     fun register_throwException_invalid() {
         doPost(body = "{\"login\" : {\"password\":\"test1123!\"}, " +
-                "\"user\" : \"name\":\"test\", \"phoneNumber\":\"000-0000-0000\"}}")
+                "\"user\" : {\"name\":\"test\", \"phoneNumber\":\"000-0000-0000\"}}")
             .checkIsError(status().isBadRequest, ErrorMessage.INVALID_VALUE, "id")
         doPost(body = "{\"login\" : {\"id\":\"test1234\"}, " +
                 "\"user\" : {\"name\":\"test\", \"phoneNumber\":\"000-0000-0000\"}}")
