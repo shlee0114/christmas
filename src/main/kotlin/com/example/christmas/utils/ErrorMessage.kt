@@ -3,7 +3,7 @@ package com.example.christmas.utils
 enum class ErrorMessage {
     INVALID_VALUE {
         override fun getMessage(additionalMessage: String) =
-            "${additionalMessage}값이 존재하지 않습니다."
+            "$additionalMessage 값이 존재하지 않습니다."
     },
     INVALID_FORMAT {
         override fun getMessage(additionalMessage: String) =
