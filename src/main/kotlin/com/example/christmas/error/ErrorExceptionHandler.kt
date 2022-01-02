@@ -14,13 +14,25 @@ class ErrorExceptionHandler {
     private val log = LoggerFactory.getLogger(javaClass)
 
     @ExceptionHandler(CommonException::class)
-    fun errorHandler(e: CommonException): ResponseEntity<ApiUtils> {
+    fun customErrorHandler(e: CommonException): ResponseEntity<ApiUtils> {
         log.error(e.message)
         return ResponseEntity(ErrorMessage.getErrorMessage(e.message ?: ""), e.status)
     }
 
+    @ExceptionHandler(IllegalStateException::class, IllegalArgumentException::class)
+    fun badRequestHandler(e: RuntimeException): ResponseEntity<ApiUtils> {
+        log.error(e.message)
+        return ResponseEntity(ErrorMessage.getErrorMessage(e.message ?: ""), HttpStatus.BAD_REQUEST)
+    }
+
+    @ExceptionHandler(NoSuchElementException::class)
+    fun notFoundHandler(e: RuntimeException): ResponseEntity<ApiUtils> {
+        log.error(e.message)
+        return ResponseEntity(ErrorMessage.getErrorMessage(e.message ?: ""), HttpStatus.NOT_FOUND)
+    }
+
     @ExceptionHandler(RuntimeException::class)
-    fun errorHandler5xx(e: RuntimeException): ResponseEntity<ApiUtils> {
+    fun error5xxHandler(e: RuntimeException): ResponseEntity<ApiUtils> {
         log.error(e.message)
         return ResponseEntity(ErrorMessage.getErrorMessage(e.message ?: ""), HttpStatus.INTERNAL_SERVER_ERROR)
     }
