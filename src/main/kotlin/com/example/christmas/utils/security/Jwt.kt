@@ -5,25 +5,19 @@ import com.auth0.jwt.JWTCreator
 import com.auth0.jwt.JWTVerifier
 import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.interfaces.DecodedJWT
+import org.springframework.stereotype.Component
 import java.util.*
+
 
 class Jwt(
     private val issuer: String,
     private val clientSecret: String,
-    private val expirySeconds: Int,
-    private val algorithm: Algorithm,
-    private val jwtVerifier: JWTVerifier
+    private val expirySeconds: Int
 ) {
-
-    constructor(issuer: String, clientSecret: String, expirySeconds: Int) : this(
-        issuer = issuer,
-        clientSecret = clientSecret,
-        expirySeconds = expirySeconds,
-        algorithm = Algorithm.HMAC512(clientSecret),
-        jwtVerifier = JWT.require(Algorithm.HMAC512(clientSecret))
-            .withIssuer(issuer)
-            .build()
-    )
+    private val algorithm = Algorithm.HMAC512(clientSecret)
+    private val jwtVerifier = JWT.require(Algorithm.HMAC512(clientSecret))
+        .withIssuer(issuer)
+        .build()
 
     fun create(claims: Claims) =
         JWT.create()
