@@ -1,0 +1,44 @@
+{
+  "properties": [
+    {
+      "name": "allowed.mapping",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "allowed.header",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "allowed.origins",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "allowed.methods",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "allowed.age",
+      "type": "java.lang.Long"
+    },
+    {
+      "name": "allowed.credentials",
+      "type": "java.lang.Boolean"
+    },
+    {
+      "name": "jwt.token.header",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "jwt.token.issuer",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "jwt.token.client-secret",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "jwt.token.expiry-seconds",
+      "type": "java.lang.String"
+    }
+  ]
+}
