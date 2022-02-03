@@ -22,3 +22,11 @@ jwt:
     issuer: christmas
     client-secret: fewge1r3we2y43qrgjytk45w612yh
     expiry-seconds: 0
+
+allowed :
+  mapping : "/**"
+  header : "**"
+  origins : "http://localhost:3000"
+  methods : "*"
+  age : 1800
+  credentials : false
